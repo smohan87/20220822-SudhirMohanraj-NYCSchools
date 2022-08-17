@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.nyc.schools.presentation.destinations.SchoolDetailScreenDestination
+import com.example.nyc.schools.presentation.detail.SchoolDetailScreen
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ramcosta.composedestinations.annotation.Destination
@@ -20,8 +22,9 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 @Destination(start = true)
-fun SchoolListScreen(navigator: DestinationsNavigator,
-                     viewModel: SchoolListViewModel = hiltViewModel()
+fun SchoolListScreen(
+    navigator: DestinationsNavigator,
+    viewModel: SchoolListViewModel = hiltViewModel()
 ) {
     val swipeRefreshState = rememberSwipeRefreshState(
         isRefreshing = viewModel.state.isRefreshing
@@ -62,17 +65,18 @@ fun SchoolListScreen(navigator: DestinationsNavigator,
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                // come back to this
-                            // navigator.navigate(
-                                  //  CompanyInfoScreenDestination(schoolInformation.symbol)
-                                //)
+                                navigator.navigate(
+                                    SchoolDetailScreenDestination(schoolInformation.dbn)
+                                )
                             }
                             .padding(16.dp)
                     )
-                    if(i < state.schools.size) {
-                        Divider(modifier = Modifier.padding(
-                            horizontal = 16.dp
-                        ))
+                    if (i < state.schools.size) {
+                        Divider(
+                            modifier = Modifier.padding(
+                                horizontal = 16.dp
+                            )
+                        )
                     }
                 }
             }

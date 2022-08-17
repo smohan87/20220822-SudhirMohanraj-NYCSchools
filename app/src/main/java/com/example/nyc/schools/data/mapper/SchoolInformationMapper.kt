@@ -12,7 +12,9 @@ fun SchoolInformationEntity.toSchoolInformation(): SchoolInformation {
         totalStudents = totalStudents,
         borough = borough,
         collegeCareerRate = collegeCareerRate,
-        graduationRate = graduationRate
+        graduationRate = graduationRate,
+        dbn = dbn
+
     )
 }
 
@@ -25,6 +27,7 @@ fun SchoolInformation.toSchoolInformationEntity(): SchoolInformationEntity {
         totalStudents = totalStudents,
         borough = borough,
         collegeCareerRate = collegeCareerRate,
-        graduationRate = graduationRate
+        graduationRate = graduationRate,
+        dbn = dbn
     )
 }

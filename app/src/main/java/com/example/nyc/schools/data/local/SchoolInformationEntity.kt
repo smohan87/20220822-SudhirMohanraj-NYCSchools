@@ -13,5 +13,6 @@ data class SchoolInformationEntity(
     val borough: String,
     val graduationRate: String,
     val collegeCareerRate: String,
+    val dbn:String,
     @PrimaryKey val id:Int? = null
 )

@@ -1,7 +1,7 @@
 package com.example.nyc.schools.data.repository
 
-import android.util.Log
 import com.example.nyc.schools.data.local.SchoolDatabase
+import com.example.nyc.schools.data.mapper.toSchoolDetail
 import com.example.nyc.schools.data.mapper.toSchoolInformation
 import com.example.nyc.schools.data.mapper.toSchoolInformationEntity
 import com.example.nyc.schools.data.remote.dto.SchoolApi
@@ -34,8 +34,8 @@ class SchoolRepositoryImpl @Inject constructor(
             val localInformation = dao.searchSchoolInformation(query)
             emit(
                 Resource.Success(
-                data = localInformation.map { it.toSchoolInformation() }
-            ))
+                    data = localInformation.map { it.toSchoolInformation() }
+                ))
 
             val isDbEmpty = localInformation.isEmpty() && query.isBlank()
             val shouldJustLoadFromCache = !isDbEmpty && !fetchFromRemote
@@ -72,20 +72,28 @@ class SchoolRepositoryImpl @Inject constructor(
         }
     }
 
-//    override suspend fun getSchoolDetails(
-//        fetchFromRemote: Boolean,
-//        query: String
-//    ): Flow<Resource<List<SchoolDetail>>> {
-//        return try {
-//
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//            emit(Resource.Error("Data could not be loaded for School Details"))
-//            null
-//        } catch (e: HttpException) {
-//            e.printStackTrace()
-//            emit(Resource.Error("Data could not be loaded for School Details"))
-//            null
-//        }
-//    }
+    override suspend fun getSchoolDetails(symbol: String): Resource<SchoolDetail> {
+        return try {
+            val schoolDetail =
+                if (api.getSchoolDetail(symbol).isNotEmpty()) api.getSchoolDetail(symbol).get(0)
+                    .toSchoolDetail() else SchoolDetail(
+                    dbn = symbol,
+                    schoolName = "Not Available",
+                    numOfSatTestTakers = "Not Available",
+                    satCriticalReadingAvgScore = "Not Available",
+                    satMathAvgScore = "Not Available",
+                    satWritingAvgScore = "Not Available"
+                )
+            Resource.Success<SchoolDetail>(schoolDetail)
+        } catch (e: HttpException) {
+            e.printStackTrace()
+            Resource.Error(
+                message = "Failed to retrieve School Details due to a Http Error"
+            )
+        } catch (e: IOException) {
+            Resource.Error(
+                message = "Failed to retrieve School Details due to an unknown error"
+            )
+        }
+    }
 }

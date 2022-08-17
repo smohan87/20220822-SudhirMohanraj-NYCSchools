@@ -151,6 +151,7 @@ fun SchoolItem.toSchoolInformation(): SchoolInformation {
         totalStudents = totalStudents ?: "",
         borough = borough ?: "",
         graduationRate = graduationRate ?: "",
-        collegeCareerRate = collegeCareerRate ?: ""
+        collegeCareerRate = collegeCareerRate ?: "",
+        dbn = dbn ?: ""
     )
 }

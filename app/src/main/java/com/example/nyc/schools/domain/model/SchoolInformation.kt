@@ -8,5 +8,6 @@ data class SchoolInformation(
     val totalStudents: String,
     val borough: String,
     val graduationRate: String,
-    val collegeCareerRate: String
+    val collegeCareerRate: String,
+    val dbn: String,
 )

@@ -11,8 +11,6 @@ interface SchoolRepository {
         query: String
     ): Flow<Resource<List<SchoolInformation>>>
 
-//    suspend fun getSchoolDetails(
-//        fetchFromRemote: Boolean,
-//        query: String
-//    ): Flow<Resource<List<SchoolDetail>>>
+    suspend fun getSchoolDetails(symbol: String
+    ): Resource<SchoolDetail>
 }
