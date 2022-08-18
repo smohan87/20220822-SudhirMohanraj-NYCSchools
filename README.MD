@@ -18,3 +18,4 @@ Future
 2. Clean up UI
 3. Cache School Details as well
 
+For a video demo - play the file "vidma_recorder_17082022_172534.mp4"
