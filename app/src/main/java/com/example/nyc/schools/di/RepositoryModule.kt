@@ -15,6 +15,6 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindSchoolRepository(
-        stockRepositoryImpl: SchoolRepositoryImpl
+        schoolRepositoryImpl: SchoolRepositoryImpl
     ): SchoolRepository
 }

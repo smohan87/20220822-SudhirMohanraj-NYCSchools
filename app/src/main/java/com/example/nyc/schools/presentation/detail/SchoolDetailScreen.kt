@@ -48,7 +48,6 @@ fun SchoolDetailScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "Number of Sat Test Takers: ${schoolInfo.numOfSatTestTakers}",
-                    fontStyle = FontStyle.Italic,
                     fontSize = 18.sp,
                     modifier = Modifier.fillMaxWidth()
                 )

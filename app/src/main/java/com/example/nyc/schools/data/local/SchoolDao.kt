@@ -19,7 +19,8 @@ interface SchoolDao {
     @Query(
         """
         SELECT * FROM schoolinformationentity
-        WHERE LOWER(name) LIKE '%' || LOWER(:query)
+        WHERE LOWER(name) LIKE '%' || LOWER(:query) || '%' OR
+                UPPER(:query) == name
         """
     )
     suspend fun searchSchoolInformation(query: String): List<SchoolInformationEntity>
